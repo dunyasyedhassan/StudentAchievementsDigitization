@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSN Student Extracurricular Activities</title>
+    <link rel="stylesheet" href="/static/styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="background"></div>
+    <div id="top-bar">
+        <div class="home-link"><a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a></div>
+        <img id="logo" src="/static/ssn_logo_white.png" alt="SSN Logo">
+    </div>
+    <h1>Faculty Home</h1>
+    <div class="welcome-message"></div>
+    <div class="button-container">
+        <button type="button" onclick="window.location.href = '{{ url_for('view_details')}}'" class="redirect-button">View student extracurricular details</button>
+        <button type="button" onclick="window.location.href = '{{ url_for('add_student_details')}}'" class="redirect-button">Enter new student extracurricular details</button>
+    </div>
+</body>
+</html>

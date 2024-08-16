@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <style>
+        #top-bar {
+            background-color: rgba(13, 75, 160, 0.8);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+            border-radius: 2%;
+        }
+
+        .home-link {
+            margin-left: 20px;
+        }
+
+        .home-link a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 28px; /* Adjust icon size */
+        }
+
+        .home-link a:hover {
+            color: #f0f0f0; /* Change color on hover if needed */
+        }
+
+        .flex-break{
+            flex: 1 0 100%
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image:linear-gradient(to right, rgb(116, 149, 250), rgb(255, 242, 242), rgb(187, 255, 248));
+        }
+        .enclosure{
+            display : flex;
+            margin-top : 20px;
+        }
+        .profile {
+            flex: 0 0 250px;
+            background: #2c3e50;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius:2%;
+            height : 500px;
+            margin-left : 20px;
+            margin-right : 20px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .profile h2 {
+            margin: 10px 0 5px;
+        }
+        .profile p {
+            margin: 5px 0;
+        }
+        
+        #logo {
+            width: 120px;
+            height: 75px;
+            margin-right: 20px;
+        }
+        .content {
+            flex: 1;
+            height : 280px;
+            padding: 20px;
+            border-radius: 2%;
+            /* background-color: rgba(97, 249, 199, 0.3); */
+            background-image: linear-gradient(rgba(97, 249, 199, 0.3), rgba(255, 103, 230, 0.3));
+        }
+        #scroll-container {
+            border: none;
+            border-radius: 5px;
+            height: 100px; 
+            overflow: hidden;
+        }
+
+        #scroll-text {
+            height: 100%;
+            color: rgb(0, 0, 0);
+            text-align: center;
+
+            -moz-transform: translateY(100%);
+            -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+
+            -moz-animation: my-animation 5s linear infinite;
+            -webkit-animation: my-animation 5s linear infinite;
+            animation: my-animation 5s linear infinite;
+        }
+
+        @-moz-keyframes my-animation {
+            from { -moz-transform: translateY(100%); }
+            to { -moz-transform: translateY(-100%); }
+        }
+
+        @-webkit-keyframes my-animation {
+            from { -webkit-transform: translateY(100%); }
+            to { -webkit-transform: translateY(-100%); }
+        }
+
+        @keyframes my-animation {
+            from {
+                -moz-transform: translateY(100%);
+                -webkit-transform: translateY(100%);
+                transform: translateY(100%);
+            }
+            to {
+                -moz-transform: translateY(-100%);
+                -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+        }
+
+        .buttonSpace{
+            margin-top:60px;
+        }
+        .buttonSpace button{
+            border-radius: 10px;
+            width: 200px;
+            height:70px;
+            background-image:linear-gradient(to right, aquamarine, rgb(115, 191, 250));
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="top-bar">
+        <div id="home-link"><a href="{{ url_for('home') }}" style="color: white; text-decoration: none;">Home</a></div>
+        <img id="logo" src="/static/ssn_logo_white.png" alt="SSN Logo">
+    </div>
+
+    <div class="enclosure">
+        <div class="profile">
+            <img src="/static/profile_bg.png" alt="Profile Picture">
+            <h2>{{ name }}</h2>
+            <p>{{ regno }}</p>
+            <p>--------------------------------------</p>
+            <br>
+        </div>
+        <div>
+            <div class="content">
+                <center>
+                    <h1 style="color: rgb(255, 0, 0);">Achivements</h1>
+                    <h2 style="color: dodgerblue;">Latest from your college !</h2>
+                </center>
+                <div id="scroll-container">
+                    <div id="scroll-text">
+                        <p>{{ latest1 }}</p>
+                        <p>{{ latest2 }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="buttonSpace">
+                <form action="{{ url_for('add_student_details' )}}" method="post">
+                    <center>
+                        <button>Submit Achivement Details</button>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

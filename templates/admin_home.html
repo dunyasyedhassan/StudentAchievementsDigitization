@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Home</title>
+    <link rel="stylesheet" href="/static/styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div id="background"></div>
+    <div id="top-bar">
+        <div class="home-link"><a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a></div>
+        <img id="logo" src="/static/ssn_logo_white.png" alt="SSN Logo">
+    </div>
+    <div class="welcome-message"></div>
+    <div class="button-container">
+        <button type="button" onclick="window.location.href = '{{ url_for('add_faculty')}}'" class="redirect-button">Add Faculty</button>
+    </div>
+    <div class="button-container">
+        <button type="button" onclick="window.location.href = '{{ url_for('add_student')}}'" class="redirect-button">Add Student</button>
+    </div>
+</body>
+</html>

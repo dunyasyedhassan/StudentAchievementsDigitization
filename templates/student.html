@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add details</title>
+    <link rel="stylesheet" href="/static/styles.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+    <style>
+        #logo {
+            width: 120px;
+            height: 75px;
+            margin-right: 20px;
+        }
+        body{
+            overflow-y: scroll;
+        }
+        #background{
+            background-image: url('/static/ssn_fountain.png');
+        }
+        form {
+            max-width: 480px;
+            width: 90%;
+            margin-left : 450px;
+            background-color: #f0f6f9;
+            padding: 2em;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.903);
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input[type="text"],
+        select,
+        input[type="file"],
+        input[type="month"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            padding-top: 5px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="#0D4BA0" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 98%;
+            background-position-y: center;
+            padding-right: 30px;
+        }
+
+        input[type="submit"] {
+            background-color: #0D4BA0;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #256eb1;
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="top-bar">
+        <div id="home-link"><a href="{{ url_for('home') }}" style="color: white; text-decoration: none;">Home</a></div>
+        <img id="logo" src="/static/ssn_logo_white.png" alt="SSN Logo">
+    </div>
+    <h2 style="color:azure">Student details</h2>
+    <form action="/submitStudentDetails" method="POST" enctype="multipart/form-data">
+        <label for="student_name">Student Name:</label>
+        <input type="text" id="student_name" name="student_name" required>
+
+        <label for="award_name">Award Name:</label>
+        <input type="text" id="award_name" name="award_name">
+
+        <label for="level">Level:</label>
+        <input type="text" id="level" name="level">
+
+        <label for="team_or_individual">Team or Individual:</label>
+        <select id="team_or_individual" name="team_or_individual" required>
+            <option value="Team">Team</option>
+            <option value="Individual">Individual</option>
+        </select>
+
+        <label for="event_name">Event Name:</label>
+        <input type="text" id="event_name" name="event_name" required>
+
+        <label for="tech_nonTech">Tech/Non-Tech:</label>
+        <select id="tech_nonTech" name="tech_nonTech" required>
+            <option value="Technical">Technical Event</option>
+            <option value="Non-Technical">Non-Technical Event</option>
+        </select>
+
+        <label for="proof">Proof (Upload Image):</label>
+        <input type="file" id="proof" name="proof" accept="image/*" required>
+
+        <label for="month_year">Month and Year:</label>
+        <input type="month" id="month_year" name="month_year" required>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

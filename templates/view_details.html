@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Achievements</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+    <style>
+        #background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/static/ssn_bg.jpeg');
+            background-size: cover;
+            background-position: center; 
+            opacity: 0.825; 
+            z-index: -1; 
+        }
+        #top-bar {
+            background-color: rgba(13, 75, 160, 0.8);
+            padding: 20px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 80px;
+        }
+
+        .home-link {
+            margin-left: 20px;
+        }
+
+        .home-link a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 28px; 
+        }
+
+        .home-link a:hover {
+            color: #f0f0f0; 
+        }
+
+        #logo {
+            width: 120px;
+            height: 75px;
+            margin-right: 20px;
+        }
+        body {
+            padding: 0 20px;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #ffffff;
+        }
+        th, td {
+            border: 1px solid #99ead3;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #0D4BA0;
+            color: white;
+        }
+        .bordered-box {
+            border: 2px solid #0D4BA0;
+            text-align: center;
+            padding: 20px;
+            margin: 50px auto;
+            border-radius: 10px;
+            /* background-color: hsla(215, 85%, 34%, 0.6); */
+            background-image: linear-gradient(rgb(46, 46, 255, 0.7), rgb(92, 92, 255, 0.8));
+            color: rgb(252, 252, 252);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 20px;
+            margin-right: 30px;
+            display: inline-block;
+            width: calc(30.00% - 10px); 
+            box-sizing: border-box; 
+        }
+        .input-container input,
+        .input-container select {
+            width: calc(100% - 10px);
+            padding: 10px;
+            border: 2px solid rgba(0, 0, 255, 0.5);
+            outline: none;
+            font-size: 16px;
+            margin-right: 10px;
+            border-radius: 10px;
+            background: rgb(248, 248, 248, 0.6);
+        }
+        .input-container select {
+            width: calc(100% - 10px);
+        }
+        .input-container label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: #777;
+            font-size: 18px;
+            pointer-events: none;
+            transition: 0.3s ease all;
+        }
+        .input-container input:focus + label,
+        .input-container input:valid + label {
+            top: -15px;
+            left: 5px;
+            font-size: 15.5px;
+            color: #ffffff;
+        }
+        .input-container select:focus + label,
+        .input-container select:valid + label {
+            top: -15px;
+            left: 5px;
+            font-size: 15.5px;
+            color: #ffffff;
+        }
+        .search-button {
+            background-color: rgb(13, 75, 160);
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .search-button:hover {
+            background-color: #0D4BA0;
+        }
+
+        #scroll-container {
+            border: none;
+            border-radius: 5px;
+            height: 100px; 
+            overflow: hidden;
+        }
+
+        #scroll-text {
+            height: 100%;
+            color: aquamarine;
+            text-align: center;
+
+            -moz-transform: translateY(100%);
+            -webkit-transform: translateY(100%);
+            transform: translateY(100%);
+
+            -moz-animation: my-animation 5s linear infinite;
+            -webkit-animation: my-animation 5s linear infinite;
+            animation: my-animation 5s linear infinite;
+        }
+
+        @-moz-keyframes my-animation {
+            from { -moz-transform: translateY(100%); }
+            to { -moz-transform: translateY(-100%); }
+        }
+
+        @-webkit-keyframes my-animation {
+            from { -webkit-transform: translateY(100%); }
+            to { -webkit-transform: translateY(-100%); }
+        }
+
+        @keyframes my-animation {
+            from {
+                -moz-transform: translateY(100%);
+                -webkit-transform: translateY(100%);
+                transform: translateY(100%);
+            }
+            to {
+                -moz-transform: translateY(-100%);
+                -webkit-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="background"></div>
+    <div id="top-bar">
+        <div class="home-link"><a href="{{ url_for('home') }}"><i class="fas fa-home"></i></a></div>
+        <img id="logo" src="/static/ssn_logo_white.png" alt="SSN Logo">
+    </div>
+    <form method="post" action="{{ url_for('search') }}">
+        <div class="bordered-box">
+            <center>
+                <h2 style="color: #ffca56;">
+                    Latest Achievements
+                </h2>
+            </center>
+            <div id="scroll-container">
+                <div id="scroll-text">
+                    <p>{{ latest_1 }}</p>
+                    <p>{{ latest_2 }}</p>
+                    <p>{{ latest_3 }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="input-container">
+            <input type="text" id="student_name" name="student_name">
+            <label for="student_name">Name of Student</label>
+        </div>
+        <div class="input-container">
+            <input type="text" id="award_name" name="award_name">
+            <label for="award_name">Award Name</label>
+        </div>
+        <div class="input-container">
+            <input type="text" id="keyword" name="keyword">
+            <label for="keyword">Keyword</label>
+        </div>
+        <div class="input-container">
+            <input type="text" id="year" name="year">
+            <label for="year">Year</label>
+        </div>
+        <div class="input-container">
+            <select id="level" name="level">
+                <option value=""></option>
+                <option value="International">International</option>
+                <option value="State">State</option>
+                <option value="Inter-University">Inter-University</option>
+            </select>
+            <label for="level">Competition Level</label>
+        </div>
+        <div class="input-container">
+            <select id="tech" name="tech">
+                <option value=""></option>
+                <option value="Tech">Technical</option>
+                <option value="Non Tech">Non-Technical</option>
+                <option value="value2">Sports</option>
+            </select>
+            <label for="tech">Category</label>
+        </div>
+        <button class="search-button" type="submit">Search</button>
+    </form>
+    <center>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student Name</th>
+                    <th>Award Name</th>
+                    <th>Event Name</th>
+                    <th>Month</th>
+                    <th>Year</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data_rows %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+                    <td>{{ row[3] }}</td>
+                    <td>{{ row[4] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </center>
+</body>
+</html>
